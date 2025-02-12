@@ -1,0 +1,211 @@
+/* Corps général de la page */
+html, body {
+    background-color: #f0f0f0; /* Couleur de fond gris clair */
+    height: 100vh; /* Utilise toute la hauteur de l'écran */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Empêche le scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre le contenu verticalement */
+    align-items: center; /* Centre horizontalement */
+}
+
+/* En-tête fixe en haut */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre le titre horizontalement */
+    position: fixed; /* Fixe l'en-tête en haut */
+    top: 0;
+    left: 0;
+    width: 100%; /* S'étend sur toute la largeur */
+    background-color: #FF0000; /* Rouge pour l'en-tête */
+    padding: 10px 15px; /* Padding ajusté */
+    color: white;
+    z-index: 1000; /* Toujours au-dessus des autres éléments */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre sous l'en-tête */
+    font-size: 1.5em; /* Taille ajustée */
+}
+
+.header img {
+    position: absolute;
+    left: 15px; /* Logo légèrement ajusté */
+    max-height: 50px;
+}
+
+.header-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+/* Conteneur principal */
+.content {
+    margin: 100px auto 70px auto; /* Ajustement pour l'en-tête et le pied de page */
+    width: 85%; /* Largeur ajustée */
+    max-width: 900px; /* Largeur maximale */
+    background-color: white; /* Fond blanc */
+    padding: 20px; /* Padding ajusté */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
+}
+
+/* Formulaires */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%; /* Champs de saisie prennent toute la largeur */
+    padding: 10px; /* Ajustement du padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em; /* Taille ajustée */
+}
+
+/* Zone des signatures */
+.container-signatures {
+    display: flex;
+    justify-content: space-between; /* Signatures alignées horizontalement */
+    flex-wrap: nowrap; /* Ne pas passer en colonne, même sur petit écran */
+    margin-top: 20px;
+    gap: 20px; /* Espacement entre les signatures */
+}
+
+.signature-box {
+    text-align: center;
+    border: 2px solid #ccc;
+    padding: 15px;
+    width: 48%; /* Largeur ajustée pour rester côte à côte */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1em;
+}
+
+.signature-box input {
+    width: 100%; /* Même largeur que le canevas */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+    padding: 10px; /* Ajoute un espace intérieur au champ */
+    font-size: 1em; /* Agrandit légèrement le texte */
+    margin-bottom: 10px; /* Espace entre l'input et le canevas */
+    border: 1px solid #ccc; /* Bordure douce */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+.signature-box canvas {
+    border: 2px solid black;
+    background-color: white;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Boutons */
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em; /* Taille ajustée */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Pied de page fixe en bas */
+.footer {
+    position: fixed; /* Fixe le pied de page en bas */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* S'étend sur toute la largeur */
+    background-color: #FF0000; /* Rouge pour le pied de page */
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Padding ajusté */
+    font-size: 1em; /* Taille ajustée */
+    z-index: 1000; /* Toujours au-dessus des autres éléments */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ombre au-dessus du pied de page */
+}
+
+/* Styles pour tablette (écrans ≤ 768px) */
+@media (max-width: 768px) {
+    .container-signatures {
+        flex-wrap: nowrap; /* Conserve les signatures alignées horizontalement */
+    }
+
+    .signature-box {
+        width: 45%; /* Réduit légèrement la largeur pour s'adapter */
+    }
+
+    .content {
+        width: 95%; /* Réduction pour tablette */
+    }
+
+    .header {
+        font-size: 1.3em; /* Taille ajustée pour l'en-tête */
+    }
+
+    .footer {
+        font-size: 0.9em; /* Taille ajustée pour le pied de page */
+    }
+}
+
+/* Modal de la signature avec un fond plus clair */
+#signatureModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Fond clair semi-transparent */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère à l'intérieur */
+}
+
+/* Image de la signature dans le modal */
+#signatureModal img {
+    max-width: 90%;
+    max-height: 90%;
+    transform: scale(2); /* Zoom à 200% */
+    border: 1px solid #ccc; /* Bordure fine pour l'image */
+    background-color: white; /* Fond blanc sous l'image */
+    padding: 10px; /* Espacement autour de l'image */
+    border-radius: 8px; /* Coins arrondis */
+}
+
+/* Bouton pour fermer le modal */
+#signatureModal button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f5f5f5; /* Fond gris clair */
+    color: black; /* Texte noir */
+    border: 1px solid #ccc; /* Bordure grise */
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Légère ombre pour le bouton */
+    transition: background-color 0.3s ease; /* Animation au survol */
+}
+
+#signatureModal button:hover {
+    background-color: #e0e0e0; /* Fond légèrement plus foncé au survol */
+}

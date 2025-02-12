@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Application{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="{% static 'img/logo.png' %}" alt="Logo AAF">
+        <div class="header-title">Delivery Consign Gasny</div>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content">
+        {% block content %}
+        <!-- Le contenu spécifique de chaque page sera inséré ici -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 AAF International - Tous droits réservés
+    </div>
+
+    <!-- Scripts globaux -->
+    <script src="{% static 'js/signature_pad.min.js' %}"></script>
+    <script src="{% static 'js/signature.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>    
+</body>
+</html>

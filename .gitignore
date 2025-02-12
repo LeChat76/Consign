@@ -1,0 +1,11 @@
+# Environnements virtuels
+venv/
+__pycache__/
+*.pyc
+
+# Configuration Django
+db.sqlite3
+.env
+
+# Fichiers de logs
+*.log

@@ -1,0 +1,67 @@
+.historique-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Force une largeur fixe pour les colonnes */
+}
+
+.historique-table th,
+.historique-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap; /* Empêche les retours à la ligne */
+    overflow: hidden; /* Cache le contenu qui dépasse */
+    text-overflow: ellipsis; /* Ajoute des points si le contenu dépasse */
+}
+
+/* Largeurs fixes pour les colonnes */
+.historique-table th:nth-child(1),
+.historique-table td:nth-child(1) {
+    width: 20%; /* Date */
+}
+
+.historique-table th:nth-child(2),
+.historique-table td:nth-child(2) {
+    width: 15%; /* Transporteur */
+}
+
+.historique-table th:nth-child(3),
+.historique-table td:nth-child(3) {
+    width: 20%; /* Numéro de commande */
+}
+
+.historique-table th:nth-child(4),
+.historique-table td:nth-child(4) {
+    width: 10%; /* Palettes */
+    text-align: center;
+}
+
+.historique-table th:nth-child(5),
+.historique-table td:nth-child(5) {
+    width: 10%; /* Réserve */
+}
+
+.historique-table th:nth-child(6),
+.historique-table td:nth-child(6) {
+    width: 15%; /* Nom chauffeur */
+}
+
+.historique-table th:nth-child(7),
+.historique-table td:nth-child(7) {
+    width: 15%; /* Signature chauffeur */
+}
+
+.historique-table th:nth-child(8),
+.historique-table td:nth-child(8) {
+    width: 15%; /* Nom employé */
+}
+
+.historique-table th:nth-child(9),
+.historique-table td:nth-child(9) {
+    width: 15%; /* Signature employé */
+}
+/* Activer le scroll si nécessaire */
+body.historique-page {
+    overflow-y: auto; /* Défilement vertical activé */
+    overflow-x: hidden; /* Pas de défilement horizontal */
+}

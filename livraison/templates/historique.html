@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Consignation{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Activer le scroll uniquement pour la page historique */
+    body {
+        height: auto;
+        overflow-y: auto;
+    }
+</style>
+
+<div id="signatureModal">
+    <img id="modalImage" src="" alt="Signature"/>
+    <button onclick="closeModal()">Fermer</button>
+</div>
+
+<body>
+    <h2>Historique des Livraisons</h2>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Transporteur</th>
+            <th>Numéro de commande</th>
+            <th>Palettes</th>
+            <th>Réserve</th>
+            <th>Nom chauffeur</th>
+            <th>Signature chauffeur</th>
+            <th>Nom employe</th>
+            <th>Signature employe</th>
+        </tr>
+        {% for livraison in livraisons %}
+        <tr>
+            <td>{{ livraison.date_heure }}</td>
+            <td>{{ livraison.transporteur }}</td>
+            <td>{{ livraison.numero_commande }}</td>
+            <td>{{ livraison.nombre_palettes }}</td>
+            <td>{% if livraison.reserve %} ✅ {% else %} ❌ {% endif %}</td>
+            <td>{{ livraison.nom_chauffeur}}</td>
+            <td>
+                <img src="{{ livraison.signature_chauffeur.url }}" alt="Signature Chauffeur" style="width:100px; cursor:pointer;" onclick="openModal('{{ livraison.signature_chauffeur.url }}')">
+            </td>
+            <td>{{ livraison.nom_employe}}</td>
+            <td>
+                <img src="{{ livraison.signature_employe.url }}" alt="Signature Employé" style="width:100px; cursor:pointer;" onclick="openModal('{{ livraison.signature_employe.url }}')">
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
