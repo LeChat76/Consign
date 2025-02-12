@@ -20,17 +20,19 @@
 <body>
     <h2>Historique des Livraisons</h2>
     <table border="1">
-        <tr>
-            <th>Date</th>
-            <th>Transporteur</th>
-            <th>Numéro de commande</th>
-            <th>Palettes</th>
-            <th>Réserve</th>
-            <th>Nom chauffeur</th>
-            <th>Signature chauffeur</th>
-            <th>Nom employe</th>
-            <th>Signature employe</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Transporteur</th>
+                <th>Numéro de commande</th>
+                <th>Palettes</th>
+                <th>Réserve</th>
+                <th>Nom chauffeur</th>
+                <th>Signature chauffeur</th>
+                <th>Nom employe</th>
+                <th>Signature employe</th>
+            </tr>
+        </thead>
         {% for livraison in livraisons %}
         <tr>
             <td>{{ livraison.date_heure }}</td>

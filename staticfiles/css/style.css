@@ -142,6 +142,11 @@ button:hover {
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Ombre au-dessus du pied de page */
 }
 
+h2 {
+    text-align: center;
+}
+
+
 /* Styles pour tablette (écrans ≤ 768px) */
 @media (max-width: 768px) {
     .container-signatures {
