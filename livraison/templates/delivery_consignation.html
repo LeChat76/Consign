@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content_class %}content{% endblock %}
+{% block header_title %}Delivery Consign Gasny{% endblock %}
+{% block left_arrow_url %}{% url 'expedition_consignation' %}{% endblock %}
+{% block right_arrow_url %}{% url 'expedition_consignation' %}{% endblock %}
+{% block historic_image %}{% static 'img/historic.png' %}{% endblock %}
+{% block historic_link %}{% url 'historique' %}{% endblock %}
+
+{% block content %}
+
+<form id="livraisonForm" method="POST" action="{% url 'delivery_submit_form' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="transporteur">Nom du transporteur :</label>
+        <input type="text" id="transporteur" name="transporteur" placeholder="Entrez le nom du transporteur" required>
+    </div>
+    <div class="form-group">
+        <label for="nombre_palettes">Nombre de palettes :</label>
+        <input type="number" id="nombre_palettes" name="nombre_palettes" placeholder="Ex : 5" required>
+    </div>
+    <div class="form-group">
+        <label for="numero_commande">Numéro de commande :</label>
+        <input type="text" id="numero_commande" name="numero_commande" placeholder="Entrez le numéro de commande" required>
+    </div>
+    <div class="form-group">
+        <label for="reserve">Réserve émise :</label>
+        <select id="reserve" name="reserve">
+            <option value="non">Non</option>
+            <option value="oui">Oui</option>
+        </select>
+    </div>
+
+    <!-- Zone des signatures -->
+    <h3>Signatures</h3>
+    <div class="container-signatures">
+        <!-- Signature du chauffeur -->
+        <div class="signature-box">
+            <label for="nom_chauffeur">Nom du chauffeur :</label>
+            <input type="text" id="nom_chauffeur" name="nom_chauffeur" placeholder="Nom du chauffeur" required>
+            <canvas id="signature-pad-chauffeur" width="350" height="150"></canvas>
+            <button type="button" onclick="clearSignature('chauffeur')">Effacer</button>
+        </div>
+
+        <!-- Signature de l'employé -->
+        <div class="signature-box">
+            <label for="nom_employe">Nom de l'employé :</label>
+            <input type="text" id="nom_employe" name="nom_employe" placeholder="Nom de l'employé" required>
+            <canvas id="signature-pad-employe" width="350" height="150"></canvas>
+            <button type="button" onclick="clearSignature('employe')">Effacer</button>
+        </div>
+    </div>
+
+    <!-- Bouton d'enregistrement -->
+    <div class="buttons" style="text-align: center; margin-top: 20px;">
+        <button type="submit">Enregistrer</button>
+    </div>
+</form>
+
+<!-- Modal pour le mot de passe -->
+<div id="passwordModal" class="modal" onclick="closePasswordModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h2>Accès à l'historique</h2>
+        <p>Veuillez entrer le mot de passe pour accéder à l'historique :</p>
+        
+        <!-- Formulaire pour capturer la touche Entrée -->
+        <form onsubmit="checkPassword(); return false;">
+            <input 
+                type="password" 
+                id="passwordInput" 
+                placeholder="Mot de passe" 
+                autofocus>
+            <br><br>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/signature_pad.min.js' %}"></script>
+<script src="{% static 'js/signature.js' %}"></script>
+<script src="{% static 'js/modal.js' %}"></script>
+
+{% endblock %}

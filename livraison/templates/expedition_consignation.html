@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}Consignation{% endblock %}
+{% load static %}
+
+{% block content_class %}content{% endblock %}
+{% block header_title %}Expedition Consign Gasny{% endblock %}
+{% block left_arrow_url %}{% url 'delivery_consignation' %}{% endblock %}
+{% block right_arrow_url %}{% url 'delivery_consignation' %}{% endblock %}
+{% block historic_image %}{% static 'img/historic.png' %}{% endblock %}
+{% block historic_link %}{% url 'historique' %}{% endblock %}
 
 {% block content %}
-<form id="livraisonForm" method="POST" action="/submit-form/">
+<form id="livraisonForm" method="POST" action="/expedition-submit-form/">
     {% csrf_token %}
     <div class="form-group">
         <label for="transporteur">Nom du transporteur :</label>
@@ -16,13 +23,6 @@
     <div class="form-group">
         <label for="numero_commande">Numéro de commande :</label>
         <input type="text" id="numero_commande" name="numero_commande" placeholder="Entrez le numéro de commande" required>
-    </div>
-    <div class="form-group">
-        <label for="reserve">Réserve émise :</label>
-        <select id="reserve" name="reserve">
-            <option value="non">Non</option>
-            <option value="oui">Oui</option>
-        </select>
     </div>
 
     <!-- Zone des signatures -->
@@ -50,4 +50,27 @@
         <button type="submit">Enregistrer</button>
     </div>
 </form>
+
+<!-- Modal pour le mot de passe -->
+<div id="passwordModal" class="modal" onclick="closePasswordModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h2>Accès à l'historique</h2>
+        <p>Veuillez entrer le mot de passe pour accéder à l'historique :</p>
+        
+        <!-- Formulaire pour capturer la touche Entrée -->
+        <form onsubmit="checkPassword(); return false;">
+            <input 
+                type="password" 
+                id="passwordInput" 
+                placeholder="Mot de passe" 
+                autofocus>
+            <br><br>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/signature_pad.min.js' %}"></script>
+<script src="{% static 'js/signature.js' %}"></script>
+<script src="{% static 'js/modal.js' %}"></script>  
+
 {% endblock %}

@@ -5,11 +5,16 @@ from django.db import models
 
 class Livraison(models.Model):
     # Informations générales
+    TYPE_OPERATION_CHOICES = [
+        ('delivery', 'Livraison'),
+        ('expedition', 'Expédition'),
+    ]
+
     transporteur = models.CharField(max_length=255)
     nombre_palettes = models.IntegerField()
     numero_commande = models.CharField(max_length=255)
     reserve = models.BooleanField(default=False)
-
+    recordDisabled = models.BooleanField(default=False)
     # Signatures
     nom_chauffeur = models.CharField(max_length=255)
     signature_chauffeur = models.ImageField(upload_to="signatures/")
@@ -18,6 +23,12 @@ class Livraison(models.Model):
 
     # Horodatage
     date_heure = models.DateTimeField(auto_now_add=True)
+
+    type_operation = models.CharField(
+        max_length=20,
+        choices=TYPE_OPERATION_CHOICES,
+        default='delivery'
+    )
 
     def __str__(self):
         return f"Livraison {self.numero_commande} - Transporteur: {self.transporteur} - Employé: {self.nom_employe}"

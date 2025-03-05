@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //console.log("Signature employé :", signaturePadEmploye.toDataURL());   
 
         // Envoi des données au serveur
-        fetch("/submit-form/", {
+        fetch(form.action, {
             method: "POST",
             body: formData,
         })

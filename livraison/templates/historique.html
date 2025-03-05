@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Consignation{% endblock %}
+{% load static %}
 
+{% block content_class %}content-table{% endblock %}
+{% block left_arrow %}{% endblock %}
+{% block right_arrow %}{% endblock %}
+{% block header_title %}Delivery and expedition{% endblock %}
+{% block title %}Consignation{% endblock %}
+{% block historic_image %}{% static 'img/home.png' %}{% endblock %}
+{% block historic_link %}{% url 'delivery_consignation' %}{% endblock %}
 {% block content %}
 
 <style>
@@ -18,37 +25,67 @@
 </div>
 
 <body>
-    <h2>Historique des Livraisons</h2>
-    <table border="1">
-        <thead>
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Transporteur</th>
+                    <th>Numéro de commande</th>
+                    <th>Palettes</th>
+                    <th>Réserve</th>
+                    <th>Nom chauffeur</th>
+                    <th>Signature chauffeur</th>
+                    <th>Nom employe</th>
+                    <th>Signature employe</th>
+                    <th>Supprimer?</th>
+                </tr>
+            </thead>
+            {% for livraison in livraisons %}
             <tr>
-                <th>Date</th>
-                <th>Transporteur</th>
-                <th>Numéro de commande</th>
-                <th>Palettes</th>
-                <th>Réserve</th>
-                <th>Nom chauffeur</th>
-                <th>Signature chauffeur</th>
-                <th>Nom employe</th>
-                <th>Signature employe</th>
+                <td>{{ livraison.date_heure|date:"d/m/Y H:i" }}</td>
+                <td>{{ livraison.type_operation }}</td>
+                <td>{{ livraison.transporteur }}</td>
+                <td>{{ livraison.numero_commande }}</td>
+                <td>{{ livraison.nombre_palettes }}</td>
+                <td>
+                    {% if livraison.type_operation == 'expedition' %}
+                        <!-- Ne rien afficher pour les expéditions -->
+                    {% elif livraison.reserve %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                </td>
+                <td>{{ livraison.nom_chauffeur}}</td>
+                <td>
+                    <img src="{{ livraison.signature_chauffeur.url }}" alt="Signature Chauffeur" style="width:100px; cursor:pointer;" onclick="openModal('{{ livraison.signature_chauffeur.url }}')">
+                </td>
+                <td>{{ livraison.nom_employe}}</td>
+                <td>
+                    <img src="{{ livraison.signature_employe.url }}" alt="Signature Employé" style="width:100px; cursor:pointer;" onclick="openModal('{{ livraison.signature_employe.url }}')">
+                </td>
+                <td>
+                    <button onclick="showCancelModal('{{ livraison.id }}')" class="cancel-btn">❌</button>
+                </td>
             </tr>
-        </thead>
-        {% for livraison in livraisons %}
-        <tr>
-            <td>{{ livraison.date_heure }}</td>
-            <td>{{ livraison.transporteur }}</td>
-            <td>{{ livraison.numero_commande }}</td>
-            <td>{{ livraison.nombre_palettes }}</td>
-            <td>{% if livraison.reserve %} ✅ {% else %} ❌ {% endif %}</td>
-            <td>{{ livraison.nom_chauffeur}}</td>
-            <td>
-                <img src="{{ livraison.signature_chauffeur.url }}" alt="Signature Chauffeur" style="width:100px; cursor:pointer;" onclick="openModal('{{ livraison.signature_chauffeur.url }}')">
-            </td>
-            <td>{{ livraison.nom_employe}}</td>
-            <td>
-                <img src="{{ livraison.signature_employe.url }}" alt="Signature Employé" style="width:100px; cursor:pointer;" onclick="openModal('{{ livraison.signature_employe.url }}')">
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div id="cancelModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeCancelModal()">&times;</span>
+            <h2>Confirmation d'annulation</h2>
+            <p>Êtes-vous sûr de vouloir annuler cet enregistrement ?</p>
+            <button id="confirmCancelBtn" onclick="confirmCancel()" class="confirm-btn">Confirmer</button>
+            <button class="cancel-btn" onclick="closeCancelModal()">Annuler</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/modal.js' %}"></script>  
+    <script src="{% static 'js/histoTimeOut.js' %}"></script>  
+
     {% endblock %}

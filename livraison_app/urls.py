@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('submit-form/', views.consignation_view, name='submit_form'),
+    path('delivery-submit-form/', views.delivery_consignation_view, name='delivery_submit_form'),
+    path('expedition-submit-form/', views.expedition_consignation_view, name='expedition_submit_form'),
     path("", include("livraison.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
