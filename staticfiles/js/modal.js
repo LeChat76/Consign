@@ -91,3 +91,15 @@ function confirmCancel() {
         console.error("ID de livraison introuvable !");
     }
 }
+
+function getCsrfToken() {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'csrftoken') {
+            return value;
+        }
+    }
+    console.warn("Aucun token CSRF trouvé !");
+    return '';
+}
