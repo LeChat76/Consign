@@ -1,5 +1,5 @@
 // Délai de redirection après inactivité (1 minute = 60000 ms)
-const redirectionDelay = 60 * 5 * 1000; 
+const redirectionDelay = 60 * 1000; 
 const deliveryPageUrl = "/delivery_consignation/";
 
 // Variable pour stocker le timer

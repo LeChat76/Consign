@@ -15,6 +15,7 @@ class Livraison(models.Model):
     numero_commande = models.CharField(max_length=255)
     reserve = models.BooleanField(default=False)
     recordDisabled = models.BooleanField(default=False)
+    
     # Signatures
     nom_chauffeur = models.CharField(max_length=255)
     signature_chauffeur = models.ImageField(upload_to="signatures/")
